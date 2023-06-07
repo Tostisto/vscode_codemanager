@@ -1,9 +1,13 @@
 # Change Log
 
-All notable changes to the "codemanager" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
 ## [Unreleased]
 
-- Initial release
+## [0.0.1] - 2023-06-07
+
+### Initial release
+
+- CodeManager can be used with any programming language.
+- Fix selected code snippets with ease. ✅
+- Generate code based on a custom prompt. 🚀
+- Automatically generate documentation for selected code. 📚
+- Chat directly with the GPT-3.5-turbo model. 💬

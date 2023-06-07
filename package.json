@@ -1,7 +1,7 @@
 {
   "name": "codemanager",
   "displayName": "CodeManager",
-  "description": "",
+  "description": "VS Code extension to manage your code with OpenAI Codex",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.78.0"
@@ -9,15 +9,104 @@
   "categories": [
     "Other"
   ],
+  "publisher": "Tostisto",
+  "icon": "resources/logo.png",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tostisto/vscode_codemanager.git",
+    "branch": "main"
+  },
+  "keywords": [
+    "chatGPT",
+    "codemanager",
+    "ai",
+    "openai",
+    "chat",
+    "gpt",
+    "typescript",
+    "javascript",
+    "code",
+    "refactor",
+    "documentation"
+  ],
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "codemanager",
+          "title": "CodeManager",
+          "icon": "resources/icon.png"
+        }
+      ]
+    },
+    "views": {
+      "codemanager": [
+        {
+          "type": "webview",
+          "id": "codemanager.sidebar",
+          "name": "CodeManager"
+        }
+      ]
+    },
     "commands": [
       {
-        "command": "codemanager.helloWorld",
-        "title": "Hello World"
+        "command": "codemanager.diff",
+        "title": "Open diff"
+      },
+      {
+        "command": "codemanager.refactorCode",
+        "title": "Refactorize selected code (OpenAI)"
+      },
+      {
+        "command": "codemanager.generateDoc",
+        "title": "Generate Documentation (OpenAI)"
+      },
+      {
+        "command": "codemanager.fixCode",
+        "title": "Fix code (OpenAI)"
+      },
+      {
+        "command": "codemanager.customCodePrompt",
+        "title": "Custom Prompt (OpenAI)"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorHasSelection && !suggestWidgetVisible",
+          "command": "codemanager.refactorCode",
+          "group": "codemanager.submenu"
+        },
+        {
+          "when": "editorHasSelection && !suggestWidgetVisible",
+          "command": "codemanager.generateDoc",
+          "group": "codemanager.submenu"
+        },
+        {
+          "when": "editorHasSelection && !suggestWidgetVisible",
+          "command": "codemanager.fixCode",
+          "group": "codemanager.submenu"
+        },
+        {
+          "when": "editorHasSelection && !suggestWidgetVisible",
+          "command": "codemanager.customCodePrompt",
+          "group": "codemanager.submenu"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "CodeManager",
+      "properties": {
+        "codeManager.openAiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API Key"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
@@ -28,22 +117,27 @@
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "format": "prettier --write \"src/**/*.ts\" \"media/**/*.js\""
   },
   "devDependencies": {
-    "@types/vscode": "^1.78.0",
     "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "16.x",
+    "@types/vscode": "^1.78.0",
     "@typescript-eslint/eslint-plugin": "^5.59.1",
     "@typescript-eslint/parser": "^5.59.1",
+    "@vscode/test-electron": "^2.3.0",
     "eslint": "^8.39.0",
     "glob": "^8.1.0",
     "mocha": "^10.2.0",
-    "typescript": "^5.0.4",
+    "prettier": "^2.8.8",
     "ts-loader": "^9.4.2",
+    "typescript": "^5.0.4",
     "webpack": "^5.81.0",
-    "webpack-cli": "^5.0.2",
-    "@vscode/test-electron": "^2.3.0"
+    "webpack-cli": "^5.0.2"
+  },
+  "dependencies": {
+    "openai": "^3.2.1"
   }
 }

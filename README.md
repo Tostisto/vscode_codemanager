@@ -1,71 +1,107 @@
-# codemanager README
+# CodeManager 👨‍💻
 
-This is the README for your extension "codemanager". After writing up a brief description, we recommend including the following sections.
+CodeManager is a Visual Studio Code extension that leverages the OpenAI GPT-3.5-turbo model to help you efficiently manage your code. It offers a wide range of features including code generation, documentation generation, code fixes, and more.
 
-## Features
+![CodeManager](images/extension.png)
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## Features ✨
 
-For example if there is an image subfolder under your extension project workspace:
+- CodeManager can be used with any programming language.
+- Fix selected code snippets with ease. ✅
+- Generate code based on a custom prompt. 🚀
+- Automatically generate documentation for selected code. 📚
+- Chat directly with the GPT-3.5-turbo model. 💬
 
-\!\[feature X\]\(images/feature-x.png\)
+## Setup ⚙️
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+*Prerequisites*: To use this extension, you'll need an OpenAI API key.
 
-## Requirements
+### Configuration
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+Setting up CodeManager is a breeze. Simply follow these steps:
 
-## Extension Settings
+1. Generate your OpenAI API key from the [OpenAI website](https://platform.openai.com/account/api-keys).
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+2. Open the extension settings in VS Code and enter your OpenAI API key:
 
-For example:
+    - `codeManager.openAiKey`: Your OpenAI API key
 
-This extension contributes the following settings:
+    ![CodeManager Settings](images/settings.png)
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+## Usage 🚀
 
-## Known Issues
+### Chat with the GPT-3.5-turbo model 💬
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+You can have interactive conversations with the GPT-3.5-turbo model using the chat feature in the sidebar. Simply click on the chat icon to activate it.
 
-## Release Notes
+![CodeManager Chat](images/chat.png)
 
-Users appreciate release notes as you update your extension.
+### Selected Code Commands ✨
 
-### 1.0.0
+You can use the following commands to generate code, documentation, fix code issues, or customize prompts. These commands can be accessed from the command palette or the context menu (right-click).
 
-Initial release of ...
+- Refactorize Code ✨
+- Generate Documentation 📚
+- Fix Code ✅
+- Customize Prompt 🎨
 
-### 1.0.1
+Command Palette:
 
-Fixed issue #.
+![CodeManager Commands](images/commands.png)
 
-### 1.1.0
+Context Menu:
 
-Added features X, Y, and Z.
+![CodeManager Context Menu](images/context_menu.png)
 
----
+### Output of Generated Code 📄
 
-## Following extension guidelines
+The generated code is displayed in a diff page where you can review the changes made by the model. You can update the generated code by clicking on the update button.
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+![CodeManager Output](images/diff_page.png)
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
 
-## Working with Markdown
+## Local Development 🛠️
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+### Prerequisites
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+- [Node.js](https://nodejs.org/en/)
+- [VS Code](https://code.visualstudio.com/)
+- [OpenAI API key](https://platform.openai.com/account/api-keys)
 
-## For more information
+### Setup
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+1. Clone the repository:
 
-**Enjoy!**
+    ```bash
+    git clone https://github.com/Tostisto/vscode_codemanager.git
+    ```
+2. Install the dependencies:
+
+    ```bash
+    npm install
+    ```
+3. Build the extension:
+
+    ```bash
+    npm run build
+    ```
+4. Open the repository in VS Code:
+
+    ```bash
+    code .
+    ```
+5. Press `F5` to start the extension in debug mode.
+
+### Build the vsix file
+
+1. Install vsce:
+
+    ```bash
+    npm install -g @vscode/vsce
+    ```
+
+2. Build the vsix file:
+
+    ```bash
+    vsce package
+    ```
