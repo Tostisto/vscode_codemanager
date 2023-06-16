@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { getCurrentCodeLanguage, exportOpenAICode } from './utils';
+import { getCurrentCodeLanguage } from './utils';
 import { SidebarChatViewProvider } from './SidebarChatViewProvider';
 import { OpenAiGeneration } from './OpenAiGeneration';
 
@@ -184,7 +184,7 @@ class CodeManager {
   }
 
   private generatePrompt(selectedText: string, message: string, additionalText?: string): string {
-    const prompt = `${message} for the given function using the appropriate language-specific documentation format. Format the code into the following markdown \`\`\`${getCurrentCodeLanguage()}\ncode\`\`\` structure, without language specification.\n\nFunction:\n\`\`\`${selectedText}\`\`\`\n\nLanguage: ${getCurrentCodeLanguage()}`;
+    const prompt = `${message} for the given function using the appropriate language-specific documentation format.\n\nFunction:\n\`\`\`${selectedText}\`\`\`\n\nLanguage: ${getCurrentCodeLanguage()}`;
 
     if (additionalText) {
       return `${prompt}\n\n${additionalText}`;
@@ -203,9 +203,8 @@ class CodeManager {
       async (progress, token) => {
         try {
           const response = await this.OpenAIGeneration.generateCompletion(prompt);
-          const refactoredText = exportOpenAICode(response, getCurrentCodeLanguage());
 
-          this.diffCode(selectedText, refactoredText);
+          this.diffCode(selectedText, response);
         } catch (err: any) {
           vscode.window.showErrorMessage(err);
         }

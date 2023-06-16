@@ -26,8 +26,25 @@ export class OpenAiGeneration {
     return new Promise<string>((resolve, reject) => {
       this._openai
         .createChatCompletion({
-          model: 'gpt-3.5-turbo',
+          model: 'gpt-3.5-turbo-0613',
           messages: [{ role: 'user', content: text }],
+          functions: [
+            {
+                "name": "openai_code_generator",
+                "description": "Generates code from a prompt.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "string",
+                            "description": "Function code",
+                        },
+                    },
+                    "required": ["code"],
+                },
+            }
+        ],
+        function_call: {"name": "openai_code_generator"}
         })
         .then((response) => {
           if (response.data.choices[0].finish_reason === 'length') {
